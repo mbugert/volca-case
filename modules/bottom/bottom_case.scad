@@ -1,7 +1,7 @@
 include <laserscad.scad>
 include <lasercut.scad>
 
-include <case_dimensions.scad>
+include <../case_dimensions.scad>
 include <safety_pin.scad>
 
 

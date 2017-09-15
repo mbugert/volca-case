@@ -1,9 +1,9 @@
 include <laserscad.scad>
 
 include <modules/case_dimensions.scad>
-use <modules/lid.scad>
-use <modules/bottom_case.scad>
 use <modules/volca_unit.scad>
+use <modules/lid/lid.scad>
+use <modules/bottom/bottom_case.scad>
 
 
 module full_case() {
