@@ -71,6 +71,6 @@ module case_wave(positive_part) {
 if (safety_pin_inner_xlen < 0) {
     echo("WARNING: Thickness too high for removable safety pins.");
 }
-if (!is_back_unobstructed) {
+if (!is_back_free) {
     echo(str("WARNING: A case for volca ", name, " is currently not supported!"));
 }

@@ -1,23 +1,23 @@
 include <laserscad.scad>
 include <lasercut.scad>
 
-include <../case_dimensions.scad>
+include <lid_dimensions.scad>
 use <io_cutouts.scad>
 
-module bezel_io_cover(bezel_io_cover_y=0) {
-    lpart("bezel_io_cover", [x+2*t, bezel_io_cover_y+2*t]) {
+module bezel_io_cover() {
+    lpart("bezel_io_cover", [x+2*t, lid_bezel_io_cover_y+2*t]) {
         translate([t,t,0])
             difference() {
                 lasercutoutSquare(
                     thickness=t,
                     x=x,
-                    y=bezel_io_cover_y+t,
+                    y=lid_bezel_io_cover_y+t,
                     finger_joints=[
                         [DOWN,0,2],
                         [LEFT,1,2],
                         [RIGHT,0,2]
                     ]);
-                translate([0,bezel_io_cover_y,0]) {
+                translate([0,lid_bezel_io_cover_y,0]) {
                     // IO/power jacks, if desired
                     if (cutouts_for_io_jacks)
                         io_cutouts(t=t);
@@ -38,7 +38,7 @@ module bezel_io_cover(bezel_io_cover_y=0) {
 }
 
 
-module lid_back(lid_back_z=0) {
+module lid_back() {
     lpart("lid_back", [x+2*t, lid_back_z+2*t])
         translate([t,t,0])
             lasercutoutSquare(thickness=t, x=x, y=lid_back_z,
@@ -50,10 +50,10 @@ module lid_back(lid_back_z=0) {
                 ]);
 }
 
-module lid_top(top_y=0) {
-    lpart("lid_top", [x+2*t, top_y+2*t])
+module lid_top() {
+    lpart("lid_top", [x+2*t, lid_top_y+2*t])
         translate([t,t,0]) {            
-            lasercutoutSquare(thickness=t, x=x, y=top_y,
+            lasercutoutSquare(thickness=t, x=x, y=lid_top_y,
                 finger_joints=[
                     [DOWN,1,6],
                     [UP,1,6],
@@ -62,3 +62,19 @@ module lid_top(top_y=0) {
                 ]);
         }
 }
+
+module lid_back_free() {
+    ltranslate([0,-t,lid_z])
+        lid_top();
+
+    ltranslate([0,0,bezel_safety_zlen]) {
+        ltranslate([0,lid_top_y+t,0])
+            lrotate([90,0,0])
+                lid_back();
+
+        ltranslate([0,-t+y-lid_bezel_io_cover_y,0])
+            bezel_io_cover();
+    }
+}
+
+lid_back_free();
