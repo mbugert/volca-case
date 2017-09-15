@@ -6,8 +6,7 @@ include <safety_pin.scad>
 
 
 module bottom_case() {
-    x = xlen + tol;
-    y = ylen + tol;
+    dif = 1;
     z = zlen + rubber_feet_zlen;
     
     module bottom_case_side(id) {
@@ -52,6 +51,7 @@ module bottom_case() {
     
     module bottom_case_front_back(id, back) {
         z_conditional = back? z+bezel_safety_zlen : z;
+        
         ltranslate([-t,-t,0])
             lpart(id, [x+2*t, z_conditional+t]) {
                 translate([t,t,0]) {
@@ -76,30 +76,39 @@ module bottom_case() {
             }
     }
     
-    ltranslate(-t*[1,1,1])
-        lpart("bottom_case_bottom", [x+2*t, y+2*t])
-            translate([t,t,0])
-                lasercutoutSquare(thickness=t, x=x, y=y,
-                    finger_joints=[
-                        [UP,1,6],
-                        [DOWN,0,6],
-                        [LEFT,1,4],
-                        [RIGHT,0,4]
-                    ]);
-    
-    lrotate([0,-90,0])
-        bottom_case_side("bottom_case_left");
-
-    ltranslate([x+t,0,0])
+    ltranslate([0,0,-zlen-rubber_feet_zlen]) {
+        ltranslate(-t*[1,1,1])
+            lpart("bottom_case_bottom", [x+2*t, y+2*t])
+                translate([t,t,0])
+                    lasercutoutSquare(thickness=t, x=x, y=y,
+                        finger_joints=[
+                            [UP,1,6],
+                            [DOWN,0,6],
+                            [LEFT,1,4],
+                            [RIGHT,0,4]
+                        ]);
+        
         lrotate([0,-90,0])
-            bottom_case_side("bottom_case_right");
+            bottom_case_side("bottom_case_left");
 
-    lrotate([90,0,0])
-        bottom_case_front_back("bottom_case_front", false);
+        ltranslate([x+t,0,0])
+            lrotate([0,-90,0])
+                bottom_case_side("bottom_case_right");
 
-    ltranslate([0,y+t,0])
         lrotate([90,0,0])
-            bottom_case_front_back("bottom_case_back", true);
+            bottom_case_front_back("bottom_case_front", false);
+
+        ltranslate([0,y+t,0])
+            lrotate([90,0,0])
+                bottom_case_front_back("bottom_case_back", true);
+    }
+            
+    ltranslate([0,safety_pin_center_y,safety_pin_z]) {
+        safety_pin("safety_pin_left");
+        ltranslate([x,0,0])
+            lrotate([0,0,180])
+                safety_pin("safety_pin_right");
+    }
 }
 
 bottom_case();

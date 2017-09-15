@@ -18,6 +18,7 @@ module safety_pin(id) {
 module safety_pin_cutout() {
     x = safety_pin_inner_xlen;
     y = safety_pin_ylen;
+    dif = 1;
     
     translate([-dif,-0.5*y,0])
         fingerJoint(LEFT, 1, 2, t, 4/3 * y, 0, x, 0, false);

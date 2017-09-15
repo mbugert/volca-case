@@ -3,10 +3,8 @@ include <lasercut.scad>
 
 include <case_dimensions.scad>
 
-
 module lid() {
-    x = xlen + tol;
-    y = ylen + tol;
+    dif = 1;
     z = max_poti_zlen + poti_safety_zlen;
     
     // ylen of the part covering the io jacks
@@ -80,7 +78,7 @@ module lid() {
     lrotate([0,-90,0])
         lid_side("lid_left");
     
-    ltranslate([xlen+t+tol,0,0])
+    ltranslate([x+t,0,0])
         lrotate([0,-90,0])
             lid_side("lid_right");
     
@@ -132,7 +130,7 @@ module lid() {
                             jack_cutouts(t, jack_r_padding=jack_r_padding);
                         
     //                            // panel screws in the back
-    //                            for (xpos = [panel_screw_x, xlen+tol-panel_screw_x]) {
+    //                            for (xpos = [panel_screw_x, x-panel_screw_x]) {
     //                                translate([xpos,-panel_screw_back_y,-dif])
     //                                cylinder(r=panel_screw_r + 0.5*jack_r_padding, h=t+2*dif);
     //                            }
@@ -147,7 +145,9 @@ module lid() {
     }
 }
 
-module jack_cutouts(t, jack_r_padding=0) {        
+module jack_cutouts(t, jack_r_padding=0) {   
+    dif = 1;
+    
     // power jack
     jack_cutout([power_jack_x,-power_jack_y,0], power_jack_y, power_jack_r);
 

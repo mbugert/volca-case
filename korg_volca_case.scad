@@ -1,30 +1,15 @@
 include <laserscad.scad>
 
-include <submodules/case_dimensions.scad>
-
-use <submodules/lid.scad>
-use <submodules/bottom_case.scad>
-use <submodules/safety_pin.scad>
-use <submodules/volca_device.scad>
+include <modules/case_dimensions.scad>
+use <modules/lid.scad>
+use <modules/bottom_case.scad>
+use <modules/volca_unit.scad>
 
 
 module full_case() {
-    ltranslate([0,0,-zlen-rubber_feet_zlen])  
-        color("aqua", alpha)
-            bottom_case();
-    
-    color("lightsalmon", alpha)
-        lid();
-    
-    ltranslate([0,safety_pin_center_y,safety_pin_z]) {
-        safety_pin("safety_pin_left");
-        ltranslate([xlen+tol,0,0])
-            lrotate([0,0,180])
-                safety_pin("safety_pin_right");
-    }
+    color("aqua", 0.55) bottom_case();
+    color("lightsalmon", 0.55) lid();
 }
 
-ldummy() {
-    volca();
-}
+ldummy() volca();
 full_case();

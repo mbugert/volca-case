@@ -14,11 +14,11 @@ unit = 4;
 cutouts_for_io_jacks = true;
 
 // create holes for magnets which hold the lid in place?
-cutouts_for_magnetic_lid = false;
+//cutouts_for_magnetic_lid = false;
 
 // magnet dimensions in millimeters - magnet_xlen is assumed to be equal to the shell thickness, i.e. use 5mm wide magnets if you set thickness to 5mm
-magnet_ylen = 5;
-magnet_zlen = 2;
+//magnet_ylen = 5;
+//magnet_zlen = 2;
 
 // safety distance between jacks and case in millimeters - increase this if you use cables with bulky plugs
 jack_r_padding = 1.5;

@@ -1,15 +1,18 @@
-include <device_dimensions.scad>
+include <volca_dimensions.scad>
 include <case_settings.scad>
 
 
 // ############# CASE SETTINGS #############
 
-// utility variables
 $fn = 100;
-dif = 1;
-alpha = 0.8;
-tol = 0.79; // extra bit of air between case and volca unit - 0.79 instead of 0.80 because lasercut bugs with 0.8 and doesn't create all fingers on some parts
 t = thickness;
+
+// extra bit of air between case and volca unit - 0.79 instead of 0.80 because lasercut is buggy with 0.8 and doesn't create all fingers on some parts
+tol = 0.79;
+
+// x and y lengths of a volca unit, including tolerance
+x = xlen + tol;
+y = ylen + tol;
 
 // space between tallest poti and the shell on top
 poti_safety_zlen = 4;
@@ -30,9 +33,9 @@ case_wave_wave_length = ylen+tol;
 case_wave_k = get_case_wave_k(ylen+tol, safety_pin_center_y);
 
 // center of magnet for bottom and lid sides
-magnet_zy = get_case_wave_pos(case_wave_amplitude, case_wave_wave_length, case_wave_k, 90);
+//magnet_zy = get_case_wave_pos(case_wave_amplitude, case_wave_wave_length, case_wave_k, 90);
 // magnet distance from wave valley in z direction
-magnet_spacing_z = t+0.5*magnet_zlen;
+//magnet_spacing_z = t+0.5*magnet_zlen;
 
 // finger radius for finger hole(s)
 finger_radius = 11;
