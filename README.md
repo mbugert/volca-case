@@ -1,9 +1,7 @@
-# Laser-cut Korg Volca Case
-Transport case and dust protector for Korg Volca synthesizers.
+# Volca Case
+Transport case and dust protector for all Korg Volca synthesizers, made with OpenSCAD.
 
-\<img\>
-
-Currently compatible with **Beats** and **Sample**. Support for the rest of the family is planned.
+\<TODO images\>
 
 ## How to build one
 Download pre-made 2D templates from the releases page or customize and create your own template (see below). Then laser the parts and assemble the case (glue recommended).
@@ -16,8 +14,8 @@ Multiple things about the case can be customized, such as:
 * disabling cutouts in the lid altogether
 
 The case is made with OpenSCAD. You will need to install:
-* OpenSCAD
-* the lasercut library
-* the (**linux-only!**) laserscad library
+* [OpenSCAD](http://www.openscad.org/)
+* the [lasercut](https://github.com/bmsleight/lasercut) library
+* the (**linux only!**) [laserscad](https://github.com/mbugert/laserscad/) library
 
-Once these are set up, open ``korg_volca_case.scad`` with OpenSCAD and modify the customization variables at the top of the file. Then, follow the instructions at "Exporting to 2D" in the laserscad readme to create a 2D template.
+Once these are set up, you can customize the case by changing stuff in ``modules/case_settings.scad``. Then, follow the instructions at "Exporting to 2D" in the [laserscad readme](https://github.com/mbugert/laserscad/blob/master/README.md) to create your 2D template.
