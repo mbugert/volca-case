@@ -17,10 +17,13 @@ module lid() {
             lid_back_obstructed();
         }
     }
-    lid_side("lid_left");
+    
+    // the dimensions of the left lid_side part depend on the unit
+    io_bezel_cover_y = is_back_free? audio_jack_corner_dims[1] : power_jack_corner_dims[1];
+    lid_side("lid_left", io_bezel_cover_y);
     
     ltranslate([x+t,0,0])
-        lid_side("lid_right");
+        lid_side("lid_right", audio_jack_corner_dims[1]);
 }
 
 
@@ -36,8 +39,9 @@ module lid_front() {
 }
 
 
-module lid_side(id) {
+module lid_side(id, io_bezel_cover_y) {
     dif = 1;
+    lid_top_y = y - io_bezel_cover_y - t;
     
     lrotate([0,-90,0])
         ltranslate([-case_wave_amplitude,-t,0])
@@ -48,7 +52,7 @@ module lid_side(id) {
                             linear_extrude(height=t) {
                                 square([lid_z, lid_top_y]);
                                 translate([0,lid_top_y])
-                                    square([bezel_safety_zlen, lid_bezel_io_cover_y+2*t]);
+                                    square([bezel_safety_zlen, io_bezel_cover_y+2*t]);
                             }
                             
                             // all them joints
@@ -57,7 +61,7 @@ module lid_side(id) {
                             translate([bezel_safety_zlen+t,0,0])
                                 fingerJoint(UP, 0, 1, t, lid_top_y, 0, lid_back_z, 0);
                             translate([0,lid_top_y+t,0])
-                                fingerJoint(RIGHT, 1, 2, t, lid_bezel_io_cover_y+t, 0, bezel_safety_zlen, 0);
+                                fingerJoint(RIGHT, 1, 2, t, io_bezel_cover_y+t, 0, bezel_safety_zlen, 0);
                             
                             // missing corners for finger joints
                             translate([bezel_safety_zlen,lid_top_y,0])
@@ -86,5 +90,4 @@ module lid_side(id) {
                         case_wave(false);
                 }
 }
-
 lid();

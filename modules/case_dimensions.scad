@@ -64,13 +64,3 @@ module case_wave(positive_part) {
             polygon([for (i = [0:$fn]) [l*pow(i/$fn, k), a*sin(deg*i/$fn)]]); 
     }
 }
-
-// ##########################################
-
-// sanity checks
-if (safety_pin_inner_xlen < 0) {
-    echo("WARNING: Thickness too high for removable safety pins.");
-}
-if (!is_back_free) {
-    echo(str("WARNING: A case for volca ", name, " is currently not supported!"));
-}

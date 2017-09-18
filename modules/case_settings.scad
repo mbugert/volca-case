@@ -1,14 +1,14 @@
 // ############### SETTINGS #################
 
 // CHOOSE YOUR FLAVOR:
-// 0: one size fits all (currently not supported)
+// 0: one size fits all
 // 1: beats
-// 2: bass (currently not supported)
-// 3: keys (currently not supported)
+// 2: bass
+// 3: keys
 // 4: sample
-// 5: fm (currently not supported)
-// 6: kick (currently not supported)
 unit = 4;
+// 5: fm
+// 6: kick
 
 // leave holes in the lid for power, MIDI and audio jacks? (so that the lid can be put on without having to unplug everything)
 cutouts_for_io_jacks = true;
@@ -31,5 +31,3 @@ lkerf = 0.05; // 3mm PMMA in Epilog Zing with 25% speed, 50% power, 5000Hz laser
 
 // separation of parts in 2D in millimeters
 lmargin = 2;
-
-// in case the material you laser from has a distinguishable top/bottom side, mirror the following lparts: bottom_case_right, bottom_case_back, bottom_case_bottom, lid_right, lid_back

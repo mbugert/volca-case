@@ -12,7 +12,7 @@ module bezel_power_cover() {
                 lasercutoutSquare(thickness=t, x=power_jack_x, y=y,
                                   finger_joints=[
                                     [DOWN,1,2],
-                                    [LEFT,0,2]
+                                    [LEFT,1,2]
                                   ]);
                 translate([0,y-t,0])
                     io_cutouts();
@@ -52,14 +52,14 @@ module lid_power_back() {
                 translate([x-corner_fill_x,-t])
                     square([corner_fill_x, t]);
             }
-            fingerJoint(UP,0,2, t, y, 0, x, 0);
+            fingerJoint(UP,1,2, t, y, 0, x, 0);
             translate([0,-t,0])
-                fingerJoint(RIGHT,0,2, t, y+t, 0, x, 0);
-            fingerJoint(LEFT,0,1, t, y, 0, x, 0);
+                fingerJoint(RIGHT,1,2, t, y+t, 0, x, 0);
+            fingerJoint(LEFT,1,1, t, y, 0, x, 0);
             fingerJoint(DOWN,0,2, t, y, 0, x-corner_fill_x, 0);
             
             // fix missing corner in finger joints
-            translate([x,y])
+            translate([-t,y,0])
                 cube(t);
         }
     }
@@ -96,13 +96,17 @@ module lid_power_side() {
     y = power_jack_corner_dims[1];
     
     lpart("lid_power_side", [x,y]+t*[1,2]) {
-        translate([0,t,0])
+        translate([0,t,0]) {
             lasercutoutSquare(thickness=t, x=x, y=y,
                               finger_joints=[
                                 [RIGHT,0,2],
                                 [UP,1,2],
-                                [DOWN,1,2]
+                                [DOWN,0,2]
                               ]);
+            // fix missing corner in finger joints
+            translate([x,-t,0])
+                cube(t);
+        }
     }    
 }
 
@@ -171,8 +175,8 @@ module lid_obstructed_top() {
                 fingerJoint(UP, 1, 4, t, y, 0, x-power_jack_corner_dims[0]-audio_jack_corner_dims[0]-2*t, 0);
             translate([power_jack_corner_dims[0]+t, y - power_jack_corner_dims[1]])
                 fingerJoint(LEFT, 0, 2, t, power_jack_corner_dims[1], 0, 0, 0);
-            fingerJoint(UP, 1, 2, t, y-power_jack_corner_dims[1]-t, 0, power_jack_corner_dims[0], 0);
-            fingerJoint(LEFT, 1, 4, t, y-power_jack_corner_dims[1]-t, 0, 0, 0);
+            fingerJoint(UP, 0, 2, t, y-power_jack_corner_dims[1]-t, 0, power_jack_corner_dims[0], 0);
+            fingerJoint(LEFT, 0, 4, t, y-power_jack_corner_dims[1]-t, 0, 0, 0);
         }
     }
 }
