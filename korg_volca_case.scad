@@ -12,5 +12,3 @@ module full_case(alpha=0.55) {
 
 ldummy() volca();
 full_case();
-
-_laserscad_mode=2;

@@ -6,9 +6,9 @@
 // 2: bass
 // 3: keys
 // 4: sample
-unit = 4;
 // 5: fm
 // 6: kick
+unit = 0;
 
 // leave holes in the lid for power, MIDI and audio jacks? (so that the lid can be put on without having to unplug everything)
 cutouts_for_io_jacks = true;
