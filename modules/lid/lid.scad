@@ -30,8 +30,8 @@ module lid_front() {
             lasercutoutSquare(thickness=t, x=x, y=lid_z,
                 finger_joints=[
                     [UP,1,6],
-                    [LEFT,1,2],
-                    [RIGHT,0,2]
+                    [LEFT,0,2],
+                    [RIGHT,1,2]
                 ]);
 }
 
@@ -52,17 +52,17 @@ module lid_side(id) {
                             }
                             
                             // all them joints
-                            fingerJoint(DOWN, 1, 2, t, 0, 0, lid_z, 0);
-                            fingerJoint(RIGHT, 1, 4, t, lid_top_y, 0, lid_z, 0);
+                            fingerJoint(DOWN, 0, 2, t, 0, 0, lid_z, 0);
+                            fingerJoint(RIGHT, 0, 4, t, lid_top_y, 0, lid_z, 0);
                             translate([bezel_safety_zlen+t,0,0])
-                                fingerJoint(UP, 1, 1, t, lid_top_y, 0, lid_back_z, 0);
+                                fingerJoint(UP, 0, 1, t, lid_top_y, 0, lid_back_z, 0);
                             translate([0,lid_top_y+t,0])
                                 fingerJoint(RIGHT, 1, 2, t, lid_bezel_io_cover_y+t, 0, bezel_safety_zlen, 0);
                             
                             // missing corners for finger joints
-                            translate([lid_z,-t,0])
+                            translate([bezel_safety_zlen,lid_top_y,0])
                                 cube(t);
-                            translate([lid_z,lid_top_y,0])
+                            translate([lid_z,-t,0])
                                 cube(t);
                         }
                         
