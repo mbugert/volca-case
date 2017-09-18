@@ -5,11 +5,11 @@ include <../case_dimensions.scad>
 include <safety_pin.scad>
 
 
-module bottom_case() {
+module base() {
     dif = 1;
     z = zlen + rubber_feet_zlen;
     
-    module bottom_case_side(id) {
+    module base_side(id) {
         ltranslate([-t,-t,0])
             lpart(id, [z+t+case_wave_amplitude, y+2*t])
                 translate([t,t,0]) {
@@ -49,7 +49,7 @@ module bottom_case() {
                 }
     }
     
-    module bottom_case_front_back(id, back) {
+    module base_front_back(id, back) {
         z_conditional = back? z+bezel_safety_zlen : z;
         
         ltranslate([-t,-t,0])
@@ -78,7 +78,7 @@ module bottom_case() {
     
     ltranslate([0,0,-zlen-rubber_feet_zlen]) {
         ltranslate(-t*[1,1,1])
-            lpart("bottom_case_bottom", [x+2*t, y+2*t])
+            lpart("base_bottom", [x+2*t, y+2*t])
                 translate([t,t,0])
                     lasercutoutSquare(thickness=t, x=x, y=y,
                         finger_joints=[
@@ -89,18 +89,18 @@ module bottom_case() {
                         ]);
         
         lrotate([0,-90,0])
-            bottom_case_side("bottom_case_left");
+            base_side("base_left");
 
         ltranslate([x+t,0,0])
             lrotate([0,-90,0])
-                bottom_case_side("bottom_case_right");
+                base_side("base_right");
 
         lrotate([90,0,0])
-            bottom_case_front_back("bottom_case_front", false);
+            base_front_back("base_front", false);
 
         ltranslate([0,y+t,0])
             lrotate([90,0,0])
-                bottom_case_front_back("bottom_case_back", true);
+                base_front_back("base_back", true);
     }
             
     ltranslate([0,safety_pin_center_y,safety_pin_z]) {
@@ -111,4 +111,4 @@ module bottom_case() {
     }
 }
 
-bottom_case();
+base();
