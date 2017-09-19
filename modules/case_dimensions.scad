@@ -26,6 +26,11 @@ safety_pin_ylen = 12;
 safety_pin_center_y = ribbon_ylen + 2*(panel_screw_r) + 9; // place the pin behind the panel screw located behind the ribbon keyboard (9mm is half of the distance between panel screw and the nearest knob on all current volcas (except fm where it doesn't matter))
 safety_pin_z = 1; // 1mm above the bezel
 
+// create several variants of the safety pins with different kerf adjustment, in the hopes of finding some that fit nicely
+safety_pin_kerf_from = 0;
+safety_pin_kerf_to = 2*lkerf;
+safety_pin_kerf_variants = 4;
+
 // case wave stuff
 case_wave_deg = 540; // three bumps
 case_wave_amplitude = safety_pin_z + 2.75*t;

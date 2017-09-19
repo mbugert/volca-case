@@ -2,7 +2,7 @@ include <laserscad.scad>
 include <lasercut.scad>
 
 include <base_dimensions.scad>
-include <safety_pin.scad>
+use <safety_pin.scad>
 
 
 module base_side(id) {
@@ -92,6 +92,25 @@ module base_bottom() {
                 ]);
 }
 
+// create variants of the safety pins with different kerf
+module safety_pin_variants() {
+    eps = 0.0001;
+    
+    for (i = [0:1:safety_pin_kerf_variants-1]) {
+        // make sure to subtract the global lkerf
+        kerf_delta = safety_pin_kerf_from + i/safety_pin_kerf_variants * (safety_pin_kerf_to - safety_pin_kerf_from) - lkerf;
+        
+        // no need to laser the safety pin with global kerf another time, so skip it
+        if (abs(kerf_delta - lkerf) > eps) {
+            ltranslate([0, i*(safety_pin_ylen+t),0]) {
+                safety_pin(str("left_", kerf_delta), kerf_delta=kerf_delta);
+                ltranslate([safety_pin_inner_xlen+2*t,0,0])
+                    safety_pin(str("right_", kerf_delta), kerf_delta=kerf_delta);
+            }
+        }
+    }
+}
+
 module base() {   
     ltranslate([0,0,-base_z] - t*[1,1,1]) {
         base_bottom();
@@ -105,12 +124,18 @@ module base() {
         ltranslate([0,y+t,0])
             base_front_back("base_back", true);
     }
-            
+    
+    // safety pins with the same kerf as the whole case
     ltranslate([0,safety_pin_center_y,safety_pin_z]) {
-        safety_pin("safety_pin_left");
+        safety_pin("left");
         ltranslate([x,0,0])
             lrotate([0,0,180])
-                safety_pin("safety_pin_right");
+                safety_pin("right");
+    }
+    
+    // safety pin variants somewhere off to the side
+    ltranslate([x+3*t, 0, -base_z-t]) {
+        safety_pin_variants();
     }
 }
 
