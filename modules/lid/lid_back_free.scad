@@ -19,15 +19,8 @@ module bezel_io_cover() {
                         [RIGHT,0,2]
                     ]);
                 translate([0,y,0]) {
-                    // IO/power jacks, if desired
                     if (cutouts_for_io_jacks)
                         io_cutouts(t=t);
-
-//                        // panel screws in the back
-//                        for (xpos = [panel_screw_x, x-panel_screw_x]) {
-//                            translate([xpos,-panel_screw_back_y,-dif])
-//                            cylinder(r=panel_screw_r + 0.5*jack_r_padding, h=t+2*dif);
-//                        }
                 }
             }
     }

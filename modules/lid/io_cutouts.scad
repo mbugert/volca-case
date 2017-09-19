@@ -23,6 +23,14 @@ module _io_cutouts_2d() {
         translate([x,0] - [midi_jack_x, audio_jacks_y])
             _io_milled_2d(audio_jacks_y+dif, audio_jacks_r);
     }
+    
+    // panel screws in the back
+    if (bezel_safety_zlen < panel_screw_zlen + tol) {
+        for (xpos = [panel_screw_x, x-panel_screw_x]) {
+            translate([xpos,-panel_screw_back_y])
+                circle(r=panel_screw_r + 0.5*jack_r_padding);
+        }
+    }
 }
 
 module _io_milled_2d(mill_y, r) {

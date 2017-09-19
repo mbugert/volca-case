@@ -18,7 +18,7 @@ y = ylen + tol;
 poti_safety_zlen = 4;
 
 // space between the aluminium bezel and the closest part of the shell above it
-bezel_safety_zlen = panel_screw_zlen + tol;
+bezel_safety_zlen = power_button_zlen + 0.5;
 
 // safety pin stuff
 safety_pin_inner_xlen = bezel_side_clearance_x - t - 1; // 1 is some arbitrary extra distance to ensure the pin can be inserted/removed
