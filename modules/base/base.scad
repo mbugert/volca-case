@@ -103,9 +103,9 @@ module safety_pin_variants() {
         // no need to laser the safety pin with global kerf another time, so skip it
         if (abs(kerf_delta - lkerf) > eps) {
             ltranslate([0, i*(safety_pin_ylen+t),0]) {
-                safety_pin(str("left_", kerf_delta), kerf_delta=kerf_delta);
+                safety_pin(str("left_", i), kerf_delta=kerf_delta);
                 ltranslate([safety_pin_inner_xlen+2*t,0,0])
-                    safety_pin(str("right_", kerf_delta), kerf_delta=kerf_delta);
+                    safety_pin(str("right_", i), kerf_delta=kerf_delta);
             }
         }
     }

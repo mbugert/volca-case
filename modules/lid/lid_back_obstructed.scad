@@ -6,7 +6,7 @@ use <io_cutouts.scad>
 
 module bezel_power_cover() {
     y=power_jack_corner_dims[1]+t;
-    lpart("bezel_power_cover", [power_jack_x, y]) {
+    lpart("bezel_power_cover", [power_jack_x, y] + [t,t]) {
         translate([t,t,0])
             difference() {
                 lasercutoutSquare(thickness=t, x=power_jack_x, y=y,
@@ -149,7 +149,7 @@ module lid_obstructed_back() {
 
 module lid_obstructed_top() {
     dif = 1;    
-    lpart("lid_obstructed_top", [x, y]) {
+    lpart("lid_obstructed_top", [x, y] + t*[2,2]) {
         translate([t,t,0]) {
             linear_extrude(height=t)
                 difference() {
