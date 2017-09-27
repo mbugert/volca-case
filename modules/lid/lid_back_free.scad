@@ -1,6 +1,7 @@
 include <laserscad.scad>
 include <lasercut.scad>
 
+use <../engravings.scad>
 include <lid_dimensions.scad>
 use <io_cutouts.scad>
 
@@ -58,7 +59,10 @@ module lid_top() {
             // fix hole caused by joints
             translate([-t,y,0])
                 cube(t);
-            branding();
+            
+            if (engravings)
+                lengrave(parent_thick=t)
+                    engraving_brand();
         }
 }
 

@@ -13,15 +13,18 @@ unit = 0;
 // leave holes in the lid for power, MIDI and audio jacks? (so that the lid can be put on without having to unplug everything)
 cutouts_for_io_jacks = true;
 
-// engrave the name of the unit on the lid and base?
-branding = true;
-
 // create holes for magnets which hold the lid in place?
 //cutouts_for_magnetic_lid = false;
 
 // magnet dimensions in millimeters - magnet_xlen is assumed to be equal to the shell thickness, i.e. use 5mm wide magnets if you set thickness to 5mm
 //magnet_ylen = 5;
 //magnet_zlen = 2;
+
+// engrave the name of the unit on the lid (and more)?
+engravings = true;
+
+// engrave the values of the most important settings into the bottom of the base? (useful when experimenting with parameters)
+debug_engravings = false;
 
 // safety distance between jacks and case in millimeters - increase this if you use cables with bulky plugs
 jack_r_padding = 1.5;
@@ -30,7 +33,7 @@ jack_r_padding = 1.5;
 thickness = 3;
 
 // laser kerf compensation in millimeters
-lkerf = 0.05; // 3mm PMMA in Epilog Zing with 25% speed, 50% power, 5000Hz laser
+lkerf = 0.05; // 2.5mm PMMA in Epilog Zing with 25% speed, 50% power, 5000Hz laser
 
 // separation of parts in 2D in millimeters
 lmargin = 2;

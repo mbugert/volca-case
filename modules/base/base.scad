@@ -1,6 +1,8 @@
 include <laserscad.scad>
 include <lasercut.scad>
 
+include <../engravings.scad>
+
 include <base_dimensions.scad>
 use <safety_pin.scad>
 
@@ -73,9 +75,9 @@ module base_front_back(id, back) {
                     fingerJoint(RIGHT, 0, 2, t, base_z, 0, x, 0);
                     
                     // add the branding on the front
-                    if (!back) {
-                        branding();
-                    }
+                    if (!back && engravings)
+                        lengrave(parent_thick=t)
+                            engraving_brand();
                 }
                 
                 // fix missing corners in finger joints
@@ -87,7 +89,7 @@ module base_front_back(id, back) {
 
 module base_bottom() {
     lpart("base_bottom", [x+2*t, y+2*t])
-        translate([t,t,0])
+        translate([t,t,0]) {
             lasercutoutSquare(thickness=t, x=x, y=y,
                 finger_joints=[
                     [UP,1,6],
@@ -95,6 +97,13 @@ module base_bottom() {
                     [LEFT,1,4],
                     [RIGHT,0,4]
                 ]);
+            lengrave(parent_thick=t) {
+                if (debug_engravings)
+                    translate([0,y,0])
+                        engraving_debug();
+                engraving_contact();                
+            }
+        }
 }
 
 // create variants of the safety pins with different kerf

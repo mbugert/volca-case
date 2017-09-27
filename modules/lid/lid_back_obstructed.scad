@@ -1,6 +1,8 @@
 include <laserscad.scad>
 include <lasercut.scad>
 
+include <../engravings.scad>
+
 include <lid_dimensions.scad>
 use <io_cutouts.scad>
 
@@ -178,7 +180,9 @@ module lid_obstructed_top() {
             fingerJoint(UP, 0, 2, t, y-power_jack_corner_dims[1]-t, 0, power_jack_corner_dims[0], 0);
             fingerJoint(LEFT, 0, 4, t, y-power_jack_corner_dims[1]-t, 0, 0, 0);
             
-            branding();
+            if (engravings)
+                lengrave(parent_thick=t)
+                    engraving_brand();
         }
     }
 }

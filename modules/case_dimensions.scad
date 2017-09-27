@@ -71,17 +71,7 @@ module case_wave(positive_part) {
     }
 }
 
-// ################ ENGRAVING #################
-branding_size = 6;
-branding_margin = branding_size / 2;
-
-module branding() {
-    if (branding) {
-        translate(branding_margin*[1,1,0])
-            lengrave(parent_thick=t, children_are_2d=false) {
-                text_on_cube(str("volca ", name), size=branding_size, face="top", center=false, font="Noto Sans CJK JP:style=Bold");
-            }
-    }
-}
-
-// ##########################################
+// ############## BRANDING STUFF ############
+engraving_font_size = 9;
+engraving_brand_margin = engraving_font_size / 2;
+font = "Liberation Sans:style=Bold"; // TODO different one?
