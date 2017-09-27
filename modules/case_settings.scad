@@ -13,6 +13,9 @@ unit = 0;
 // leave holes in the lid for power, MIDI and audio jacks? (so that the lid can be put on without having to unplug everything)
 cutouts_for_io_jacks = true;
 
+// engrave the name of the unit on the lid and base?
+branding = true;
+
 // create holes for magnets which hold the lid in place?
 //cutouts_for_magnetic_lid = false;
 

@@ -58,6 +58,7 @@ module lid_top() {
             // fix hole caused by joints
             translate([-t,y,0])
                 cube(t);
+            branding();
         }
 }
 

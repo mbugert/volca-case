@@ -1,5 +1,6 @@
 include <volca_dimensions.scad>
 include <case_settings.scad>
+use <text_on.scad>
 
 
 // ############# CASE SETTINGS #############
@@ -69,3 +70,18 @@ module case_wave(positive_part) {
             polygon([for (i = [0:$fn]) [l*pow(i/$fn, k), a*sin(deg*i/$fn)]]); 
     }
 }
+
+// ################ ENGRAVING #################
+branding_size = 6;
+branding_margin = branding_size / 2;
+
+module branding() {
+    if (branding) {
+        translate(branding_margin*[1,1,0])
+            lengrave(parent_thick=t, children_are_2d=false) {
+                text_on_cube(str("volca ", name), size=branding_size, face="top", center=false, font="Noto Sans CJK JP:style=Bold");
+            }
+    }
+}
+
+// ##########################################

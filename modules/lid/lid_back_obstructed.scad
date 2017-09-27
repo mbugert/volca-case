@@ -177,6 +177,8 @@ module lid_obstructed_top() {
                 fingerJoint(LEFT, 0, 2, t, power_jack_corner_dims[1], 0, 0, 0);
             fingerJoint(UP, 0, 2, t, y-power_jack_corner_dims[1]-t, 0, power_jack_corner_dims[0], 0);
             fingerJoint(LEFT, 0, 4, t, y-power_jack_corner_dims[1]-t, 0, 0, 0);
+            
+            branding();
         }
     }
 }

@@ -71,6 +71,11 @@ module base_front_back(id, back) {
                     }
                     fingerJoint(LEFT, 1, 2, t, base_z, 0, x, 0);
                     fingerJoint(RIGHT, 0, 2, t, base_z, 0, x, 0);
+                    
+                    // add the branding on the front
+                    if (!back) {
+                        branding();
+                    }
                 }
                 
                 // fix missing corners in finger joints

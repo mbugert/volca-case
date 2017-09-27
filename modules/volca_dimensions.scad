@@ -48,7 +48,7 @@ tworow_ribbon_ylen = 55; // TODO educated guess!
 // 4: sample
 // 5: fm
 // 6: kick
-names_by_unit = ["one_size_fits_all", "beats", "bass", "keys", "sample", "fm", "kick"];
+names_by_unit = ["", "beats", "bass", "keys", "sample", "fm", "kick"];
 max_poti_zlen_by_unit = [large_poti_zlen, medium_poti_zlen, large_poti_zlen, medium_poti_zlen, medium_poti_zlen, small_poti_zlen, large_poti_zlen];
 ribbon_ylen_by_unit = [onerow_ribbon_ylen, onerow_ribbon_ylen, onerow_ribbon_ylen, tworow_ribbon_ylen, onerow_ribbon_ylen, tworow_ribbon_ylen, onerow_ribbon_ylen];
 // if the area between the power and the MIDI jack is free
