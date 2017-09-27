@@ -1,27 +1,30 @@
 include <lid_dimensions.scad>
+include <../case_settings.scad>
 
 module _io_cutouts_2d() {
     dif = 1;
 
-    // power jack
-    translate([power_jack_x, -power_jack_y])
-        _io_milled_2d(power_jack_y+dif, power_jack_r);
+    if (cutouts_for_io_jacks) {
+        // power jack
+        translate([power_jack_x, -power_jack_y])
+            _io_milled_2d(power_jack_y+dif, power_jack_r);
 
-    // midi jack
-    translate([x,0] - [midi_jack_x, midi_jack_y])
-        _io_milled_2d(midi_jack_y+dif, midi_jack_r);
+        // midi jack
+        translate([x,0] - [midi_jack_x, midi_jack_y])
+            _io_milled_2d(midi_jack_y+dif, midi_jack_r);
 
-    // audio jacks
-    hull() {
-        translate([0,-audio_jacks_y]) {
-            for(xi=[0,1,2]) {
-                translate([x,0] - [audio_jacks_x + xi*audio_jacks_spacing_x, 0])
-                    _io_milled_2d(audio_jacks_y+dif, audio_jacks_r);
+        // audio jacks
+        hull() {
+            translate([0,-audio_jacks_y]) {
+                for(xi=[0,1,2]) {
+                    translate([x,0] - [audio_jacks_x + xi*audio_jacks_spacing_x, 0])
+                        _io_milled_2d(audio_jacks_y+dif, audio_jacks_r);
+                }
             }
+                // put a fourth one in the position of the midi jack: this way, the thin bridge between the midi jack cutout and the leftmost audio jack cutout vanishes            
+            translate([x,0] - [midi_jack_x, audio_jacks_y])
+                _io_milled_2d(audio_jacks_y+dif, audio_jacks_r);
         }
-            // put a fourth one in the position of the midi jack: this way, the thin bridge between the midi jack cutout and the leftmost audio jack cutout vanishes            
-        translate([x,0] - [midi_jack_x, audio_jacks_y])
-            _io_milled_2d(audio_jacks_y+dif, audio_jacks_r);
     }
     
     // panel screws in the back

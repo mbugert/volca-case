@@ -19,10 +19,8 @@ module bezel_io_cover() {
                         [LEFT,1,2],
                         [RIGHT,0,2]
                     ]);
-                translate([0,y,0]) {
-                    if (cutouts_for_io_jacks)
-                        io_cutouts(t=t);
-                }
+                translate([0,y,0])
+                    io_cutouts(t=t);
             }
     }
 }
