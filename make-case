@@ -1,0 +1,44 @@
+# move this file and the src/ folder into the laserscad dist/ folder, then call with 'make -f make-case -j <j>' - do not set this higher than 7, otherwise, filename clashes can unfortunately occur
+
+UNITS := 0.one_size_fits_all 1.beats 2.bass 3.keys 4.sample 5.fm 6.kick
+THICKNESSES := 2.5 3 5
+TARGETS :=
+
+MODEL_NAME=korg_volca_case
+MODEL=src/$(MODEL_NAME).scad
+TARGET_DIR=target
+
+# $(1): unit.name, $(2): thickness
+define build
+$(eval unit=$(word 1,$(subst ., ,$(1))))
+$(eval name=$(word 2,$(subst ., ,$(1))))
+$(eval thickness=$(2))
+
+$(eval SPECIALIZED_TARGET_DIR=$(TARGET_DIR)/$(name)/)
+$(eval TEMP_DIR=$(SPECIALIZED_TARGET_DIR)temp$(unit)/)
+
+TARGETS += build-$(unit)-$(thickness)
+.PHONY: build-$(unit)-$(thickness)
+
+build-$(unit)-$(thickness):
+	@echo Making $(name) for $(t)mm thick materials...
+	@mkdir -p $(SPECIALIZED_TARGET_DIR)
+	+@$(MAKE) cut engrave model=$(MODEL) \
+		TARGET_DIR=$(SPECIALIZED_TARGET_DIR) \
+		TEMP=$(TEMP_DIR) \
+		OFLAGS='-D lkerf=0 -D thickness=$(thickness) -D unit=$(unit)'
+	@cd $(SPECIALIZED_TARGET_DIR); \
+		mv $(MODEL_NAME).dxf $(MODEL_NAME)__$(name)__$(thickness).dxf; \
+		mv $(MODEL_NAME)_engrave.svg $(MODEL_NAME)__$(name)__$(thickness)_engrave.svg
+	+@$(MAKE) clean model=$(MODEL) TEMP=$(TEMP_DIR)
+endef
+
+$(foreach t,$(THICKNESSES),$(foreach u,$(UNITS),$(eval $(call build,$(u),$(t)))))
+
+.PHONY: all
+.DEFAULT_GOAL := all
+
+all: $(TARGETS)
+
+clean:
+	@rm -rf $(TARGET_DIR)

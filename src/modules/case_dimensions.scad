@@ -5,7 +5,7 @@ use <text_on.scad>
 
 // ############# CASE SETTINGS #############
 
-$fn = 25;
+$fn = 100;
 t = thickness;
 
 // extra bit of air between case and volca unit - 0.79 instead of 0.80 because lasercut is buggy with 0.8 and doesn't create all fingers on some parts
