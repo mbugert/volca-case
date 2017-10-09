@@ -76,7 +76,7 @@ module base_front_back(id, back) {
                     
                     // add the branding on the front
                     if (!back && engravings)
-                        lengrave(parent_thick=t)
+                        lengrave(t, true)
                             engraving_brand();
                 }
                 
@@ -97,7 +97,7 @@ module base_bottom() {
                     [LEFT,1,4],
                     [RIGHT,0,4]
                 ]);
-            lengrave(parent_thick=t) {
+            lengrave(t, true) {
                 if (debug_engravings)
                     translate([0,y,0])
                         engraving_debug();

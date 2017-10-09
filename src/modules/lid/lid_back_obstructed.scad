@@ -181,7 +181,7 @@ module lid_obstructed_top() {
             fingerJoint(LEFT, 0, 4, t, y-power_jack_corner_dims[1]-t, 0, 0, 0);
             
             if (engravings)
-                lengrave(parent_thick=t)
+                lengrave(t, true)
                     engraving_brand();
         }
     }

@@ -59,7 +59,7 @@ module lid_top() {
                 cube(t);
             
             if (engravings)
-                lengrave(parent_thick=t)
+                lengrave(t, true)
                     engraving_brand();
         }
 }
