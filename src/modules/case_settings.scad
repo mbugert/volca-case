@@ -37,3 +37,6 @@ lkerf = 0.05; // 2.5mm PMMA in Epilog Zing with 25% speed, 50% power, 5000Hz las
 
 // separation of parts in 2D in millimeters
 lmargin = 2;
+
+// don't engrave parts with their ID
+lidentify = false;

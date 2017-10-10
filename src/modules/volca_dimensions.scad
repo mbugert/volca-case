@@ -40,6 +40,8 @@ tworow_ribbon_ylen = 55; // TODO educated guess!
 
 // #### DIMENSIONS DEPENDING ON THE UNIT ####
 
+// TODO: confirm that highest panel element on FM is a small poti
+
 // order applying to all lists:
 // 0: one size fits all
 // 1: beats
