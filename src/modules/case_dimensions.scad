@@ -19,7 +19,7 @@ y = ylen + tol;
 poti_safety_zlen = 4;
 
 // space between the aluminium bezel and the closest part of the shell above it
-bezel_safety_zlen = power_button_zlen + 0.5;
+bezel_safety_zlen = power_button_zlen + 0.75;
 
 // safety pin stuff
 safety_pin_inner_xlen = bezel_side_clearance_x - t - 1; // 1 is some arbitrary extra distance to ensure the pin can be inserted/removed
@@ -34,7 +34,7 @@ safety_pin_kerf_variants = 4;
 
 // case wave stuff
 case_wave_deg = 540; // three bumps
-case_wave_amplitude = safety_pin_z + 2.75*t;
+case_wave_amplitude = safety_pin_z + t + 4.4; // arbitrary, but nice choice
 case_wave_wave_length = ylen+tol;
 case_wave_k = get_case_wave_k(ylen+tol, safety_pin_center_y);
 

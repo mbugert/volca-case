@@ -22,8 +22,14 @@ module _safety_pin_sane(id, kerf_delta) {
                     // kerf variations here
                     offset(delta=kerf_delta) {
                         square([x, y]);
-                        projection()
-                            fingerJoint(LEFT, 1, 2, t, 4/3 * y, 0, 0, 0, true);
+                        
+                        // here, it's necessary to fix the bug in lasercut which always creates finger joints twice as long as they should be
+                        intersection() {
+                            projection()
+                                fingerJoint(LEFT, 1, 2, t, 4/3 * y, 0, 0, 0, true);
+                            translate([-t,0])
+                                square([t, y]);
+                        }
                     }
 }
 
