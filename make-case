@@ -7,7 +7,7 @@ LKERF := 0
 MODELS :=
 PNGS :=
 
-MODEL_NAME=korg_volca_case
+MODEL_NAME=volca_case
 MODEL=src/$(MODEL_NAME).scad
 TARGET_DIR=target/
 GIF=$(TARGET_DIR)$(MODEL_NAME).gif
