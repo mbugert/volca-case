@@ -35,8 +35,6 @@ module bezel_audio_cover() {
                 translate([-x+midi_jack_x,y-t,0])
                     io_cutouts();
             }
-            translate([midi_jack_x,-t,0])
-                cube(t);
         }
     }
 }
