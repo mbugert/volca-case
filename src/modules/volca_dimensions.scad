@@ -4,8 +4,7 @@ xlen = 193;
 ylen = 115;
 zlen = 29; // bottom to bezel
 
-// TODO measured from a modified device!
-rubber_feet_zlen = 2;
+rubber_feet_zlen = 1;
 
 // for the area between the two panel screws: clearance on the x axis between the device edge and the closest poti
 bezel_side_clearance_x = 8;
@@ -32,15 +31,13 @@ panel_screw_back_y = 5 + panel_screw_r; // measured from the back (ymax)
 
 small_poti_zlen = 10;
 medium_poti_zlen = 15;  // bass/treble poti on sample
-large_poti_zlen = 18; // cutoff poti on bass (TODO educated guess!)
+large_poti_zlen = 16.5; // cutoff poti on bass
 
 onerow_ribbon_ylen = 40;
 tworow_ribbon_ylen = 55; // TODO educated guess!
 
 
 // #### DIMENSIONS DEPENDING ON THE UNIT ####
-
-// TODO: confirm that highest panel element on FM is a small poti
 
 // order applying to all lists:
 // 0: one size fits all
