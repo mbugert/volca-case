@@ -1,5 +1,5 @@
 # Volca Case
-Transport case and dust protector for all Korg Volca synthesizers, made with OpenSCAD.
+Laser-cut transport case and dust protector for all Korg Volca synthesizers. Made with OpenSCAD.
 
 ![Volca Case](docs/volca_case_01.jpg)
 
