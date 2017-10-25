@@ -2,3 +2,4 @@
 *.dxf
 *.stl
 target/
+!src/img/*.dxf

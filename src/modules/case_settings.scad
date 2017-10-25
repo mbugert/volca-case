@@ -13,10 +13,10 @@ unit = 0;
 // leave holes in the lid for power, MIDI and audio jacks? (so that the lid can be put on without having to unplug everything)
 cutouts_for_io_jacks = true;
 
-// engrave the name of the unit on the lid (and more)?
+// add line-art engravings on the lid (if available) and the name of the unit on the bottom (and more)?
 engravings = true;
 
-// engrave the values of the most important settings into the bottom of the base? (useful when experimenting with parameters)
+// engrave the values of the most important settings into the bottom of the base? (useful when experimenting with parameters; also generated when engravings = false)
 debug_engravings = false;
 
 // safety distance between jacks and case in millimeters - increase this if you use cables with bulky plugs

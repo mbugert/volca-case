@@ -7,35 +7,66 @@ include <lid_dimensions.scad>
 use <io_cutouts.scad>
 
 module bezel_power_cover() {
-    y=power_jack_corner_dims[1]+t;
-    lpart("bezel_power_cover", [power_jack_x, y] + [t,t]) {
-        translate([t,t,0])
-            difference() {
-                lasercutoutSquare(thickness=t, x=power_jack_x, y=y,
-                                  finger_joints=[
-                                    [DOWN,1,2],
-                                    [LEFT,1,2]
-                                  ]);
-                translate([0,y-t,0])
-                    io_cutouts();
+    bezel_y=power_jack_corner_dims[1]+t;
+    
+    module bezel_power_cover_shape() {
+        difference() {
+            lasercutoutSquare(thickness=t, x=power_jack_x, y=bezel_y,
+                              finger_joints=[
+                                [DOWN,1,2],
+                                [LEFT,1,2]
+                              ]);
+            translate([0,bezel_y-t,0])
+                io_cutouts();
+        }
+    }
+    
+    lpart("bezel_power_cover", [power_jack_x, bezel_y] + [t,t]) {
+        translate([t,t,0]) {
+            bezel_power_cover_shape();
+        
+            if (engravings) {
+                lengrave(t, true)
+                    intersection() {
+                        translate([0,bezel_y-y-t])
+                            engraving_line_art("../");
+                        projection()
+                            bezel_power_cover_shape();
+                }
             }
+        }
     }
 }
 
 module bezel_audio_cover() {
-    y=audio_jack_corner_dims[1]+t;    
-    lpart("bezel_audio_cover", [midi_jack_x,y]+t*[1,1]) {
-        translate([0,t,0]) {
-            difference() {
-                lasercutoutSquare(thickness=t, x=midi_jack_x, y=y,
-                                  finger_joints=[
-                                    [DOWN,0,2],
-                                    [RIGHT,0,2]
-                                  ]);
-                translate([-x+midi_jack_x,y-t,0])
-                    io_cutouts();
-            }
+    bezel_y=audio_jack_corner_dims[1]+t;
+    
+    module bezel_audio_cover_shape() {
+        difference() {
+            lasercutoutSquare(thickness=t, x=midi_jack_x, y=bezel_y,
+                              finger_joints=[
+                                [DOWN,0,2],
+                                [RIGHT,0,2]
+                              ]);
+            translate([-x+midi_jack_x,bezel_y-t,0])
+                io_cutouts();
         }
+    }
+    
+    lpart("bezel_audio_cover", [midi_jack_x,bezel_y]+t*[1,1]) {
+        translate([0,t,0]) {
+            bezel_audio_cover_shape();     
+            
+            if (engravings) {
+                lengrave(t, true)
+                    intersection() {
+                        translate([midi_jack_x-x,bezel_y-y-t])
+                            engraving_line_art("../");
+                        projection()
+                            bezel_audio_cover_shape();
+                }
+            }
+        }        
     }
 }
 
@@ -148,39 +179,47 @@ module lid_obstructed_back() {
 }
 
 module lid_obstructed_top() {
-    dif = 1;    
+    module lid_obstructed_top_shape() {
+        linear_extrude(height=t)
+            difference() {
+                square([x, y]);
+                dif = 1;
+                
+                // remove the power jack corner
+                translate([0,y - power_jack_corner_dims[1]- t] - dif*[1,0])
+                    square(power_jack_corner_dims + (t+dif)*[1,1]);
+
+                // remove the io jack corner
+                translate([x,y] - audio_jack_corner_dims - t*[1,1])
+                    square(audio_jack_corner_dims + (t+dif)*[1,1]);
+            }
+            
+        // finger joints, counter-clockwise starting from the origin
+        fingerJoint(DOWN, 1, 6, t, y, 0, x, 0);
+        fingerJoint(RIGHT, 1, 4, t, y-audio_jack_corner_dims[1]-t, 0, x, 0);
+        translate([x,y-t,0] - audio_jack_corner_dims)
+            fingerJoint(UP, 1, 4, t, 0, 0, audio_jack_corner_dims[0], 0);
+        translate([x-t,y,0] - audio_jack_corner_dims)
+            fingerJoint(RIGHT, 1, 2, t, audio_jack_corner_dims[1], 0, 0, 0);
+        translate([power_jack_corner_dims[0]+t, 0, 0])
+            fingerJoint(UP, 1, 4, t, y, 0, x-power_jack_corner_dims[0]-audio_jack_corner_dims[0]-2*t, 0);
+        translate([power_jack_corner_dims[0]+t, y - power_jack_corner_dims[1]])
+            fingerJoint(LEFT, 0, 2, t, power_jack_corner_dims[1], 0, 0, 0);
+        fingerJoint(UP, 0, 2, t, y-power_jack_corner_dims[1]-t, 0, power_jack_corner_dims[0], 0);
+        fingerJoint(LEFT, 0, 4, t, y-power_jack_corner_dims[1]-t, 0, 0, 0);
+    }    
+    
     lpart("lid_obstructed_top", [x, y] + t*[2,2]) {
         translate([t,t,0]) {
-            linear_extrude(height=t)
-                difference() {
-                    square([x, y]);
-                    
-                    // remove the power jack corner
-                    translate([0,y - power_jack_corner_dims[1]- t] - dif*[1,0])
-                        square(power_jack_corner_dims + (t+dif)*[1,1]);
+            lid_obstructed_top_shape();
 
-                    // remove the io jack corner
-                    translate([x,y] - audio_jack_corner_dims - t*[1,1])
-                        square(audio_jack_corner_dims + (t+dif)*[1,1]);
-                }
-                            
-            // finger joints, counter-clockwise starting from the origin
-            fingerJoint(DOWN, 1, 6, t, y, 0, x, 0);
-            fingerJoint(RIGHT, 1, 4, t, y-audio_jack_corner_dims[1]-t, 0, x, 0);
-            translate([x,y-t,0] - audio_jack_corner_dims)
-                fingerJoint(UP, 1, 4, t, 0, 0, audio_jack_corner_dims[0], 0);
-            translate([x-t,y,0] - audio_jack_corner_dims)
-                fingerJoint(RIGHT, 1, 2, t, audio_jack_corner_dims[1], 0, 0, 0);
-            translate([power_jack_corner_dims[0]+t, 0, 0])
-                fingerJoint(UP, 1, 4, t, y, 0, x-power_jack_corner_dims[0]-audio_jack_corner_dims[0]-2*t, 0);
-            translate([power_jack_corner_dims[0]+t, y - power_jack_corner_dims[1]])
-                fingerJoint(LEFT, 0, 2, t, power_jack_corner_dims[1], 0, 0, 0);
-            fingerJoint(UP, 0, 2, t, y-power_jack_corner_dims[1]-t, 0, power_jack_corner_dims[0], 0);
-            fingerJoint(LEFT, 0, 4, t, y-power_jack_corner_dims[1]-t, 0, 0, 0);
-            
             if (engravings)
                 lengrave(t, true)
-                    engraving_brand();
+                    intersection() {
+                        engraving_line_art("../");
+                        projection()
+                            lid_obstructed_top_shape();
+                    }
         }
     }
 }
