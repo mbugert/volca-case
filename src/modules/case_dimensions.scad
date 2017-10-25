@@ -38,11 +38,6 @@ case_wave_amplitude = safety_pin_z + t + 4.4; // arbitrary, but nice choice
 case_wave_wave_length = ylen+tol;
 case_wave_k = get_case_wave_k(ylen+tol, safety_pin_center_y);
 
-// center of magnet for bottom and lid sides
-//magnet_zy = get_case_wave_pos(case_wave_amplitude, case_wave_wave_length, case_wave_k, 90);
-// magnet distance from wave valley in z direction
-//magnet_spacing_z = t+0.5*magnet_zlen;
-
 // finger radius for finger hole(s)
 finger_radius = 11;
 

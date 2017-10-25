@@ -13,13 +13,6 @@ unit = 0;
 // leave holes in the lid for power, MIDI and audio jacks? (so that the lid can be put on without having to unplug everything)
 cutouts_for_io_jacks = true;
 
-// create holes for magnets which hold the lid in place?
-//cutouts_for_magnetic_lid = false;
-
-// magnet dimensions in millimeters - magnet_xlen is assumed to be equal to the shell thickness, i.e. use 5mm wide magnets if you set thickness to 5mm
-//magnet_ylen = 5;
-//magnet_zlen = 2;
-
 // engrave the name of the unit on the lid (and more)?
 engravings = true;
 

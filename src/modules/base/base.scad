@@ -31,11 +31,6 @@ module base_side(id) {
                             linear_extrude(height=t+2*dif) {
                                 case_wave(false);
                                 square([dif, y]); // to ensure valid 2-manifold
-        //                                if (cutouts_for_magnetic_lid) {
-        //                                    translate(magnet_zy - [magnet_spacing_z, 0]) {
-        //                                        square([magnet_zlen, magnet_ylen], center=true);
-        //                                    }
-        //                                }
                             }
                     }
                     
