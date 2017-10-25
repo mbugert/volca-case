@@ -27,7 +27,7 @@ power_button_zlen = 1;
 panel_screw_zlen = 3;
 panel_screw_r = 2.5;
 panel_screw_x = 4 + panel_screw_r; // measured from either side (xmin, xmax)
-panel_screw_back_y = 5 + panel_screw_r; // measured from the back (ymax)
+panel_screw_back_y = 4.5 + panel_screw_r; // measured from the back (ymax)
 
 small_poti_zlen = 10;
 medium_poti_zlen = 15;  // bass/treble poti on sample
