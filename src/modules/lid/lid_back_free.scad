@@ -1,7 +1,7 @@
 include <laserscad.scad>
 include <lasercut.scad>
 
-use <../engravings.scad>
+include <../engravings.scad>
 include <lid_dimensions.scad>
 use <io_cutouts.scad>
 
