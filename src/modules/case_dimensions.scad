@@ -15,7 +15,6 @@
 
 include <volca_dimensions.scad>
 include <case_settings.scad>
-use <text_on.scad>
 
 
 // ############# CASE SETTINGS #############
