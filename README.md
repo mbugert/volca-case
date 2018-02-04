@@ -22,7 +22,7 @@ Multiple things about the case can be customized, such as:
 The case is made with OpenSCAD. You will need to install:
 * [OpenSCAD](http://www.openscad.org/), version 2015.03
 * the [lasercut](https://github.com/bmsleight/lasercut) library
-* the (**linux only!**) [laserscad](https://github.com/mbugert/laserscad/) library, v0.2.0
+* the (**linux only!**) [laserscad](https://github.com/mbugert/laserscad/) library, at least version 0.3.x
 
 Once these are set up, you can customize the case by changing stuff in ``src/modules/case_settings.scad``. Then, follow the instructions at "Exporting to 2D" in the [laserscad readme](https://github.com/mbugert/laserscad/blob/master/README.md) to create your 2D template.
 

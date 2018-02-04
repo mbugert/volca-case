@@ -13,7 +13,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+// require laserscad version 0.3.x
 include <laserscad.scad>
+lassert_version(major=0, minor=3);
 
 include <modules/case_dimensions.scad>
 use <modules/volca_unit.scad>
